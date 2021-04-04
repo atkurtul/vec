@@ -54,7 +54,11 @@ int main() {
   const f64 inv = 2.0 / (f64)size;
 
   vec(vec(f64)) xloc = vec_new(vec(f64))(chunk_size);
+  vec(u8) rows = vec_new(u8)(size * chunk_size);
+
   xloc.len = xloc.cap;
+  rows.len = rows.cap;
+
 
   for (u64 i = 0; i < xloc.len; ++i) {
     xloc.p[i] = vec_new(f64)(VLEN);
@@ -65,8 +69,6 @@ int main() {
     xloc.p[i / VLEN].p[i % VLEN] = (f64)i * inv - 1.5;
   }
 
-  vec(u8) rows = vec_new(u8)(size * chunk_size);
-  rows.len = rows.cap;
 
   for (u64 j = 0; j < size; ++j) {
     f64 ci[8] = {};
